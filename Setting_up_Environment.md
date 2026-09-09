@@ -1,4 +1,4 @@
-# Setting Up Environment for DS
+# Setting Up Environment for Data Science
 
 ## Rrquired Sofwares
 > VS Code (IDE: Integrated Development Environment) \
