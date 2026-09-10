@@ -4,6 +4,19 @@
 
 > **File Extension:** `file_name.md`
 ## Table of Content
+- [Markdown Language](#markdown-language)
+  - [Table of Content](#table-of-content)
+    - [Headings](#headings)
+    - [Block of Words](#block-of-words)
+    - [Line Break](#line-break)
+    - [Headings with Block of Words](#headings-with-block-of-words)
+    - [Face of Text](#face-of-text)
+    - [List \& Bullet Points](#list--bullet-points)
+    - [Links \& Hyperlink Text](#links--hyperlink-text)
+    - [Inserting Image](#inserting-image)
+    - [Adding Code or Code Block](#adding-code-or-code-block)
+    - [Adding Tables](#adding-tables)
+    - [Content List](#content-list)
 
 ---
 
