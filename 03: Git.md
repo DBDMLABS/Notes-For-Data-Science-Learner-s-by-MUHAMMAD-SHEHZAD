@@ -325,6 +325,26 @@ main ───────────────►
        \
         feature ────►
 ```
+Practice
+```bash
+# Step 1: Create and switch to feature branch
+git switch -c feature
+
+# Step 2: Create a new file and commit
+echo "Feature Code" > feature.txt
+git add .
+git commit -m "added feature file"
+
+# Step 3: Switch back to main
+git switch main
+
+# Step 4: Merge
+git merge feature
+
+Updating a1b2c3d..f4e5d6c
+Fast-forward
+ feature.txt | 1 +
+ 1 file changed, 1 insertion(+)```
 
 ### Three-Way Merge
 
