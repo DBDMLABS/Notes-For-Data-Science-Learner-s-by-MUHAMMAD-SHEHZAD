@@ -1,0 +1,586 @@
+# Git
+
+---
+
+Used by developers to **control versions** and collaborate on the same project.
+
+## Table of Contents
+
+* [Git Commands](#git-commands)
+* [Setup](#setup)
+* [Git 3-Stage Workflow](#git-3-stage-workflow)
+* [Initialize Repository](#initialize-repository)
+* [See Changes & History](#see-changes--history)
+* [.gitignore & .gitkeep](#gitignore--gitkeep)
+* [Unstaging & Restore](#unstaging--restore)
+* [Undo Commits](#undo-commits)
+* [Revert Commit](#revert-commit)
+* [Branching](#branching)
+* [Merging Branches](#merging-branches)
+* [Merge Conflicts](#merge-conflicts)
+* [Remote Repository](#remote-repository)
+* [Clone Repository](#clone-repository)
+* [Push & Pull](#push--pull)
+* [Fetch](#fetch)
+* [Stash](#stash)
+* [Tags](#tags)
+* [Basic GitHub Workflow](#basic-github-workflow)
+
+---
+
+## Git Commands
+
+### Setup
+
+> Check Git version:
+
+```bash
+git --version
+```
+
+### Configure User Details
+
+```bash
+git config --global user.name "User Name"
+git config --global user.email "user@email.com"
+```
+
+> Check configuration:
+
+```bash
+git config --list
+```
+
+---
+
+## Git 3-Stage Workflow
+
+**Working Directory → Staging Area → Repository**
+
+> Check status:
+
+```bash
+git status
+```
+
+### Add to Staging
+
+> Specific file:
+
+```bash
+git add file_name.txt
+```
+
+> All files:
+
+```bash
+git add .
+```
+
+> Multiple files:
+
+```bash
+git add file1.txt file2.txt
+```
+
+> Check status again:
+
+```bash
+git status
+```
+
+### Commit
+
+> Specific staged changes:
+
+```bash
+git commit -m "Your message"
+```
+
+---
+
+## Initialize Repository
+
+> Create folder:
+
+```bash
+mkdir dbdm-project
+```
+
+> Enter folder:
+
+```bash
+cd dbdm-project
+```
+
+> Initialize Git:
+
+```bash
+git init
+```
+
+---
+
+## See Changes & History
+
+> See changes:
+
+```bash
+git diff
+```
+
+> Commit history:
+
+```bash
+git log
+```
+
+> Compact history:
+
+```bash
+git log --oneline
+```
+
+> See branches with commits:
+
+```bash
+git log --oneline --all --graph
+```
+
+---
+
+## .gitignore & .gitkeep
+
+### .gitignore
+
+> Create a file named:
+
+```text
+.gitignore
+```
+
+> Examples:
+
+```text
+file_name.txt
+folder/
+*.log
+temp*
+!important.log
+```
+
+> Add `.gitignore`:
+
+```bash
+git add .gitignore
+```
+
+### .gitkeep
+
+> `.gitkeep` is used to keep an empty folder in Git.
+
+```bash
+mkdir uploads
+touch uploads/.gitkeep
+git add uploads/.gitkeep
+```
+
+---
+
+## Unstaging & Restore
+
+> Remove specific file from staging:
+
+```bash
+git restore --staged file_name.txt
+```
+
+> Remove all files from staging:
+
+```bash
+git restore --staged .
+```
+
+> Discard changes in a file and restore last committed version:
+
+```bash
+git restore file_name.txt
+```
+
+> **Warning:** This permanently discards the uncommitted changes in that file.
+
+---
+
+## Undo Commits
+
+### Soft Reset
+
+> Undo last commit and keep changes **staged**:
+
+```bash
+git reset --soft HEAD~1
+```
+
+### Mixed Reset
+
+> Undo last commit and keep changes **unstaged**:
+
+```bash
+git reset HEAD~1
+```
+
+### Hard Reset
+
+> Undo last commit and delete uncommitted changes:
+
+```bash
+git reset --hard HEAD~1
+```
+
+> Hard reset can permanently delete work.
+
+---
+
+## Revert Commit
+
+> Safely undo a specific commit by creating a new commit:
+
+```bash
+git revert commit_code
+```
+
+> To see commit code:
+
+```bash
+git log --oneline
+```
+
+---
+
+## Branching
+
+> Create branch:
+
+```bash
+git branch branch_name
+```
+
+> Switch branch:
+
+```bash
+git switch branch_name
+```
+
+> Create + switch:
+
+```bash
+git switch -c branch_name
+```
+
+> Check branches:
+
+```bash
+git branch
+```
+
+> Switch to main:
+
+```bash
+git switch main
+```
+
+> Delete branch:
+
+```bash
+git branch -d branch_name
+```
+
+> Force delete:
+
+```bash
+git branch -D branch_name
+```
+---
+
+## Merging Branches
+
+> Switch to the branch that will receive changes:
+
+```bash
+git switch main
+```
+
+> Merge another branch:
+
+```bash
+git merge branch_name
+```
+
+### Fast-Forward Merge
+
+> Main has no new commit since the branch was created.
+
+```text
+main ───────────────►
+       \
+        feature ────►
+```
+
+### Three-Way Merge
+
+> Both branches have new commits.
+
+```text
+        feature ───►
+       /
+main ──●───────────►
+       \
+        changes ───►
+```
+
+> Git creates a **merge commit**.
+
+### Squash Merge
+
+> Combines feature commits into one commit.
+
+```bash
+git merge --squash branch_name
+git commit -m "Add feature"
+```
+
+### Octopus Merge
+
+> Merges multiple branches at once.
+
+```bash
+git merge branch1 branch2 branch3
+```
+
+---
+
+## Merge Conflicts
+
+> Check conflict:
+
+```bash
+git status
+```
+
+> Open the conflicted file and choose the required changes.
+
+```text
+<<<<<<< HEAD
+Current branch
+=======
+Incoming branch
+>>>>>>> branch_name
+```
+
+> After fixing:
+
+```bash
+git add .
+git commit -m "Resolve merge conflict"
+```
+
+> Abort merge:
+
+```bash
+git merge --abort
+```
+
+---
+
+## Remote Repository
+
+> Add GitHub remote:
+
+```bash
+git remote add origin https://github.com/username/repository.git
+```
+
+> Check remote:
+
+```bash
+git remote -v
+```
+
+> Rename remote:
+
+```bash
+git remote rename origin upstream
+```
+
+> Remove remote:
+
+```bash
+git remote remove origin
+```
+
+---
+
+## Clone Repository
+
+> Download an existing GitHub repository:
+
+```bash
+git clone https://github.com/username/repository.git
+```
+
+> Enter repository:
+
+```bash
+cd repository
+```
+
+---
+
+## Push & Pull
+
+### Push
+
+> Upload local commits to GitHub:
+
+```bash
+git push origin main
+```
+
+> First push + set upstream:
+
+```bash
+git push -u origin main
+```
+
+### Pull
+
+> Download and merge latest changes:
+
+```bash
+git pull origin main
+```
+
+---
+
+## Fetch
+
+> Download remote changes without merging:
+
+```bash
+git fetch
+```
+
+> Fetch from origin:
+
+```bash
+git fetch origin
+```
+
+> **fetch** = download changes
+> **pull** = fetch + merge
+
+---
+
+## Stash
+
+> Temporarily save uncommitted changes:
+
+```bash
+git stash
+```
+
+> See stashes:
+
+```bash
+git stash list
+```
+
+> Restore latest stash:
+
+```bash
+git stash pop
+```
+
+> Apply stash without removing it:
+
+```bash
+git stash apply
+```
+
+> Delete latest stash:
+
+```bash
+git stash drop
+```
+
+---
+
+## Tags
+
+> Create tag:
+
+```bash
+git tag v1.0
+```
+
+> List tags:
+
+```bash
+git tag
+```
+
+> Push tag:
+
+```bash
+git push origin v1.0
+```
+
+> Push all tags:
+
+```bash
+git push origin --tags
+```
+
+---
+
+## Basic GitHub Workflow
+
+```bash
+git clone repository-url
+cd repository
+
+git switch -c feature-name
+
+# Make changes
+
+git status
+git add .
+git commit -m "Add feature"
+
+git push -u origin feature-name
+```
+
+> Then create a **Pull Request** on GitHub.
+
+---
+
+## Quick Git Workflow
+
+```bash
+git status
+git add .
+git commit -m "message"
+git push
+```
+
+> **Edit → Add → Commit → Push**
+
+---
+
+### Author
+
+**MUHAMMAD SHEHZAD**
+
+GitHub: https://github.com/dbdmlabs
+
+---
