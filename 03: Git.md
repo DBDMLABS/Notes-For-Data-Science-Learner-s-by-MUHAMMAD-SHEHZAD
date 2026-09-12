@@ -325,8 +325,9 @@ main ───────────────►
        \
         feature ────►
 ```
-Practice
-```bash
+> Practice
+
+``` bash
 # Step 1: Create and switch to feature branch
 git switch -c feature
 
@@ -340,12 +341,7 @@ git switch main
 
 # Step 4: Merge
 git merge feature
-
-Updating a1b2c3d..f4e5d6c
-Fast-forward
- feature.txt | 1 +
- 1 file changed, 1 insertion(+)```
-
+```
 ### Three-Way Merge
 
 > Both branches have new commits.
@@ -358,6 +354,27 @@ main ──●───────────►
         changes ───►
 ```
 
+> Practice
+
+``` bash
+# Step 1: Create login-feature branch
+git switch -c login-feature
+
+# Step 2: Add a file on the feature branch
+echo "Login Feature" > login.txt
+git add .
+git commit -m "added login"
+
+# Step 3: Switch back to main and add a different file
+git switch main
+echo "Main Update" > main.txt
+git add .
+git commit -m "main updated"
+
+# Step 4: Merge with -m to avoid Vim editor
+git merge login-feature -m "three way merge completed"
+```
+
 > Git creates a **merge commit**.
 
 ### Squash Merge
@@ -365,18 +382,89 @@ main ──●───────────►
 > Combines feature commits into one commit.
 
 ```bash
-git merge --squash branch_name
-git commit -m "Add feature"
-```
+Feature branch before squash:
 
+ui-feature:   A --- B --- C --- D --- E
+                    (navbar) (footer) (sidebar)
+
+After squash merge onto main:
+
+main:         A --- B --- F
+                          |
+                    (UI Feature Complete)
+                    All 3 commits combined into one
+```
+> Practice
+```bash
+# Step 1: Create ui-feature branch
+git switch -c ui-feature
+
+# Step 2: Make multiple commits
+echo "Navbar" > navbar.txt
+git add .
+git commit -m "navbar added"
+
+echo "Footer" > footer.txt
+git add .
+git commit -m "footer added"
+
+echo "Sidebar" > sidebar.txt
+git add .
+git commit -m "sidebar added"
+
+# Step 3: Switch to main
+git switch main
+
+# Step 4: Squash merge (stages all changes but does NOT commit yet)
+git merge --squash ui-feature
+```
 ### Octopus Merge
 
 > Merges multiple branches at once.
 
 ```bash
-git merge branch1 branch2 branch3
-```
+Before octopus merge:
 
+feature-a:   A --- X
+feature-b:   A --- Y
+feature-c:   A --- Z
+
+After octopus merge:
+
+             X
+            / \
+main:  A---+   M  (one merge commit, 3 parents)
+            \ /|
+             Y |
+              \|
+               Z
+```
+>Practice
+```bash
+# Branch 1: feature-a
+git switch -c feature-a
+echo "A Feature" > a.txt
+git add .
+git commit -m "feature a"
+
+# Branch 2: feature-b
+git switch main
+git switch -c feature-b
+echo "B Feature" > b.txt
+git add .
+git commit -m "feature b"
+
+# Branch 3: feature-c
+git switch main
+git switch -c feature-c
+echo "C Feature" > c.txt
+git add .
+git commit -m "feature c"
+
+# Switch to main and merge all three at once
+git switch main
+git merge feature-a feature-b feature-c -m "octopus merge all features"
+```
 ---
 
 ## Merge Conflicts
@@ -560,7 +648,6 @@ git push origin v1.0
 ```bash
 git push origin --tags
 ```
-
 ---
 
 ## Basic GitHub Workflow
@@ -594,13 +681,11 @@ git push
 ```
 
 > **Edit → Add → Commit → Push**
-
 ---
 
 ### Author
 
 **MUHAMMAD SHEHZAD**
-
 GitHub: https://github.com/dbdmlabs
 
 ---
