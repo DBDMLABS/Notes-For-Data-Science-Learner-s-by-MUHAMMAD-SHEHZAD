@@ -6,25 +6,60 @@ Used by developers to **control versions** and collaborate on the same project.
 
 ## Table of Contents
 
-* [Git Commands](#git-commands)
-* [Setup](#setup)
-* [Git 3-Stage Workflow](#git-3-stage-workflow)
-* [Initialize Repository](#initialize-repository)
-* [See Changes & History](#see-changes--history)
-* [.gitignore & .gitkeep](#gitignore--gitkeep)
-* [Unstaging & Restore](#unstaging--restore)
-* [Undo Commits](#undo-commits)
-* [Revert Commit](#revert-commit)
-* [Branching](#branching)
-* [Merging Branches](#merging-branches)
-* [Merge Conflicts](#merge-conflicts)
-* [Remote Repository](#remote-repository)
-* [Clone Repository](#clone-repository)
-* [Push & Pull](#push--pull)
-* [Fetch](#fetch)
-* [Stash](#stash)
-* [Tags](#tags)
-* [Basic GitHub Workflow](#basic-github-workflow)
+- [Git and GitHub](#git-and-github)
+  - [Table of Contents](#table-of-contents)
+  - [Git Commands](#git-commands)
+    - [Setup](#setup)
+    - [Configure User Details](#configure-user-details)
+  - [Git 3-Stage Workflow](#git-3-stage-workflow)
+    - [Add to Staging](#add-to-staging)
+    - [Commit](#commit)
+  - [Initialize Repository](#initialize-repository)
+  - [See Changes \& History](#see-changes--history)
+  - [.gitignore \& .gitkeep](#gitignore--gitkeep)
+    - [.gitignore](#gitignore)
+    - [.gitkeep](#gitkeep)
+  - [Unstaging \& Restore](#unstaging--restore)
+  - [Undo Commits](#undo-commits)
+    - [Soft Reset](#soft-reset)
+    - [Mixed Reset](#mixed-reset)
+    - [Hard Reset](#hard-reset)
+  - [Revert Commit](#revert-commit)
+  - [Branching](#branching)
+  - [Merging Branches](#merging-branches)
+    - [Fast-Forward Merge](#fast-forward-merge)
+    - [Three-Way Merge](#three-way-merge)
+    - [Squash Merge](#squash-merge)
+    - [Octopus Merge](#octopus-merge)
+  - [Merge Conflicts](#merge-conflicts)
+  - [Remote Repository](#remote-repository)
+  - [Clone Repository](#clone-repository)
+  - [Push \& Pull](#push--pull)
+    - [Push](#push)
+    - [Pull](#pull)
+  - [Fetch](#fetch)
+  - [Remote Branches](#remote-branches)
+  - [Fork](#fork)
+    - [Fork a Repository](#fork-a-repository)
+    - [Clone Your Fork](#clone-your-fork)
+    - [Add Original Repo as Upstream](#add-original-repo-as-upstream)
+    - [Create a Branch](#create-a-branch)
+    - [Push to Your Fork](#push-to-your-fork)
+    - [Create a Pull Request](#create-a-pull-request)
+    - [Review \& Merge](#review--merge)
+    - [Sync Fork with Upstream](#sync-fork-with-upstream)
+    - [Fetch Remote Branches](#fetch-remote-branches)
+    - [Create Local Branch from Remote Branch](#create-local-branch-from-remote-branch)
+    - [Make Changes \& Push](#make-changes--push)
+    - [Another Developer Pulls the Changes](#another-developer-pulls-the-changes)
+    - [Complete Fork Workflow](#complete-fork-workflow)
+  - [Stash](#stash)
+  - [Git Rebase](#git-rebase)
+  - [Tags](#tags)
+  - [Basic GitHub Workflow](#basic-github-workflow)
+  - [Quick Git Workflow](#quick-git-workflow)
+    - [Author](#author)
+
 
 ---
 
@@ -992,7 +1027,7 @@ git push
 
 ### Author
 
-**MUHAMMAD SHEHZAD**
+**MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
 
 ---
