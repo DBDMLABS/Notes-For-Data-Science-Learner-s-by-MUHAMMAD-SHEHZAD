@@ -938,7 +938,31 @@ git stash apply
 ```bash
 git stash drop
 ```
+> WorkFlow
+```bash
+# Nobita is working on feature
+# Edits login.txt but not ready to commit
 
+# Urgent bug needs fixing!
+# Stash current work
+git stash
+
+# Switch to main branch
+git checkout main
+
+# Fix the bug
+git add bugfix.txt
+git commit -m "Fix urgent bug"
+git push
+
+# Go back to feature branch
+git checkout feature-login
+
+# Bring back stashed work
+git stash pop
+
+# Continue working on feature
+```
 ---
 ## Git Rebase
 > Rebase vs Merge
