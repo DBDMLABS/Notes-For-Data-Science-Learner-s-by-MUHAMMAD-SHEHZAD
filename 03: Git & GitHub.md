@@ -587,7 +587,290 @@ git fetch origin
 > **fetch** = download changes
 > **pull** = fetch + merge
 
+Woekflow
+```bash
+# 1. Always start by downloading latest code
+git pull
+
+# 2. Make your changes in text editor...
+
+# 3. Check what changed
+git status
+
+# 4. Stage all changes
+git add .
+
+# 5. Commit with a message
+git commit -m "Describe what you changed"
+
+# 6. Upload to GitHub
+git push
+```
 ---
+
+## Remote Branches
+> Pushing a Branch to GitHub
+```bash
+# Nobita creates a feature branch locally
+git checkout -b feature-login
+# Makes changes and commits
+git add login.txt
+git commit -m "Add login page"
+# Push branch to GitHub
+git push -u origin feature-login
+```
+
+> View all branches
+```bash
+# See local branches only
+git branch
+# See all branches (local + remote)
+git branch -a
+```
+
+> Checking Out Remote Branches
+```bash
+# Suneo wants to see Nobita's feature branch
+git fetch origin
+git checkout feature-login
+```
+
+> Deleting Remote Branches
+```bash
+# Delete branch from GitHub
+git push origin --delete feature-login
+# Delete local branch
+git branch -d feature-login
+```
+## Fork
+### Fork a Repository
+
+> Go to the original GitHub repository → click Fork.
+
+```bash
+Gian's Repo
+      ↓
+    Fork
+      ↓
+Nobita's GitHub Repo
+```
+### Clone Your Fork
+
+> Clone your fork, not the original repository.
+
+```bash
+git clone git@github.com:nobita-nobi/school-project.git
+cd school-project
+```
+> Check the remote:
+
+```bash
+git remote -v
+origin  → Your fork
+```
+### Add Original Repo as Upstream
+
+> Add the original repository as upstream.
+
+```bash
+git remote add upstream git@github.com:gian-doraemon/school-project.git
+```
+> Check:
+
+```bash
+git remote -v
+origin    → Your fork
+upstream  → Original repository
+origin vs upstream
+Remote	Meaning
+origin	Your fork
+upstream	Original repository
+```
+> Remember:
+
+origin   = YOU
+upstream = ORIGINAL OWNER
+### Create a Branch
+
+> Always create a separate branch for your changes.
+
+```bash
+git switch -c fix-homepage
+
+Make your changes, then:
+
+git add homepage.txt
+git commit -m "Fix homepage title"
+```
+
+### Push to Your Fork
+
+> Push your branch to origin.
+
+```bash
+git push origin fix-homepage
+Your branch
+     |
+     ↓
+  origin
+     |
+     ↓
+Your GitHub Fork
+```
+### Create a Pull Request
+
+> On your GitHub fork:
+> Compare and pull request → Create pull request
+
+> Make sure:
+
+> base repository:
+> gian-doraemon/school-project
+
+> base branch:
+> main
+
+← Pull Request ←
+
+> your fork:
+> nobita-nobi/school-project
+
+> branch:
+```bash
+fix-homepage
+Pull Request Flow
+Your Fork
+fix-homepage
+      |
+      | Pull Request
+      ↓
+Original Repo
+main
+      |
+      ↓
+Review → Approve → Merge
+```
+
+### Review & Merge
+
+> The original owner reviews your Pull Request.
+
+```bash
+Review Code
+     ↓
+Comments / Changes
+     ↓
+Approve
+     ↓
+Merge Pull Request
+
+After merging, your changes become part of the original repository.
+```
+
+### Sync Fork with Upstream
+
+> After the original repository changes:
+
+```bash
+git switch main
+git pull upstream main
+git push origin main
+```
+> Flow:
+
+```bash
+Original Repo
+     ↓
+upstream
+     ↓
+Local main
+     ↓
+origin
+     ↓
+Your Fork
+
+Now your fork is up to date.
+
+Working with Remote Branches
+
+Suppose Suneo has a remote branch:
+
+origin/feature-database
+```
+### Fetch Remote Branches
+```bash
+git fetch origin
+```
+
+> View remote branches:
+```bash
+git branch -r
+
+Example:
+
+origin/main
+origin/feature-database
+origin/fix-homepage
+```
+
+### Create Local Branch from Remote Branch
+```bash
+git switch -c feature-database origin/feature-database
+```
+
+> Now you have a local copy of the remote branch.
+```bash
+Remote Branch
+origin/feature-database
+          ↓
+Local Branch
+feature-database
+```
+
+### Make Changes & Push
+
+Edit the files, then:
+```bash
+git add database.txt
+git commit -m "Fix database connection string"
+git push origin feature-database
+```
+> The changes are pushed back to the same remote branch.
+
+### Another Developer Pulls the Changes
+
+> Suneo can update his local branch:
+```bash
+git switch feature-database
+git pull origin feature-database
+```
+
+### Complete Fork Workflow
+```bash
+FORK
+  ↓
+CLONE
+  ↓
+ADD UPSTREAM
+  ↓
+CREATE BRANCH
+  ↓
+MAKE CHANGES
+  ↓
+COMMIT
+  ↓
+PUSH → ORIGIN
+  ↓
+PULL REQUEST
+  ↓
+REVIEW
+  ↓
+MERGE
+  ↓
+SYNC WITH UPSTREAM
+```
+
+
 
 ## Stash
 
@@ -622,7 +905,31 @@ git stash drop
 ```
 
 ---
+## Git Rebase
+> Rebase vs Merge
+```bash
+MERGE:
+main:    A --- B --- C --- M (merge commit)
+              \           /
+feature:       D ------- E
 
+REBASE:
+main:    A --- B --- C
+                         \
+feature:                  D' --- E'
+(commits moved to end of main)
+```
+> Never rebase commits that have been pushed to GitHub and shared with others. Only rebase local commits.
+```bash
+# Nobita's feature branch is behind main
+git checkout feature-login
+
+# Update with latest main
+git rebase main
+
+# Now feature branch has latest main changes
+# And commits are in a clean line
+```
 ## Tags
 
 > Create tag:
