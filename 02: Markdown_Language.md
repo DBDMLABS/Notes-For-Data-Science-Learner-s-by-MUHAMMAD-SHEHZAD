@@ -1,5 +1,6 @@
-# Markdown Language
-
+# ============================================================
+#                  MARKDOWN LANGUAGE — LECTURE NOTES
+# ============================================================
 **Used by developers for documentation and comments.**
 
 > **File Extension:** `file_name.md`
