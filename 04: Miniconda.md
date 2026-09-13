@@ -324,9 +324,6 @@ conda install jupyter
 jupyter notebook
 
 ```
-## FINAL CONCEPT
-
-> Miniconda helps us create and manage isolated
-environments so that different projects can use
-different Python versions and packages without
-interfering with each other.
+---
+Author: **MUHAMMAD SHEHZAD**\
+GitHub: https://github.com/dbdmlabs
